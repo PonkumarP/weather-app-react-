@@ -2,7 +2,9 @@ import axios from "axios";
 
 // Base URL for OpenWeatherMap API
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
-const API_KEY = import.meta.env.VITE_API_KEY;
+
+// API key — loaded from .env (VITE_API_KEY) with fallback hardcoded for dev
+const API_KEY = import.meta.env.VITE_API_KEY || "42808cc9678e775a2257f2733bb98556";
 
 /**
  * Fetch current weather data for a given city.
@@ -11,6 +13,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
  * @returns {Promise<Object>} Current weather data
  */
 export const fetchCurrentWeather = async (city, unit = "metric") => {
+
   const response = await axios.get(`${BASE_URL}/weather`, {
     params: {
       q: city,
@@ -29,6 +32,7 @@ export const fetchCurrentWeather = async (city, unit = "metric") => {
  * @returns {Promise<Array>} Array of 5 daily forecast objects
  */
 export const fetchForecast = async (city, unit = "metric") => {
+
   const response = await axios.get(`${BASE_URL}/forecast`, {
     params: {
       q: city,
